@@ -1,0 +1,8 @@
+
+client_max_body_size 1g;        # ≥ 你要传的单文件最大值
+client_body_timeout 600s;       # 上传超时（从开始接收体到接收完成）
+send_timeout         600s;      # 发送给客户端的超时
+fastcgi_read_timeout 600s;      # 等待 PHP 响应的最大时间
+
+
+client_body_buffer_size 256k;

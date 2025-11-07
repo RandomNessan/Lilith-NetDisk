@@ -1,0 +1,12 @@
+    # 将 /dl/secretfile/<base64> 转交给 endecrypt.php
+    location ~ ^/dl/secretfile/([^/]+)$ {
+        set $b64 $1;
+        rewrite ^ /dl/secretfile/endecrypt.php?b64=$b64 last;
+    }
+
+    # 确保 PHP 能被解析（按你现有站点保持一致）
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass unix:/tmp/php-cgi-xx.sock;  # ← 请替换成你的实际 PHP sock
+    }
